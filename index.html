@@ -4,53 +4,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plane UI</title>
+    <title>3D Card</title>
     <style>
         body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
             margin: 0;
-            overflow: hidden;
-            background-color: #87CEEB; /* Sky Blue */
+            background-color: #f0f0f0;
         }
 
-        .plane {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 200px;
-            height: 150px;
-            background-color: #32CD32; /* Green */
-            transform: translate(-50%, -50%) rotateX(60deg);
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-
-        .wing {
-            position: absolute;
-            width: 80px;
+        .card {
+            width: 300px;
             height: 200px;
-            background-color: #FFD700; /* Gold */
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            perspective: 1000px;
         }
 
-        .wing.left {
-            transform: rotate(45deg) translateX(-50%);
-            top: 30%;
-            left: 20%;
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
         }
 
-        .wing.right {
-            transform: rotate(-45deg) translateX(50%);
-            top: 30%;
-            left: 50%;
+        .card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-front {
+            transform: rotateY(0deg);
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+            background-color: #32CD32; /* Green */
+            color: white;
         }
     </style>
 </head>
 
 <body>
-    <div class="plane">
-        <div class="wing left"></div>
-        <div class="wing right"></div>
+    <div class="card">
+        <div class="card-inner">
+            <div class="card-face card-front">
+                <h2>Front Side</h2>
+            </div>
+            <div class="card-face card-back">
+                <h2>Back Side</h2>
+            </div>
+        </div>
     </div>
 </body>
 
